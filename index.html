@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+
+<!-- Romantic font -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: 'Playfair Display', serif;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.container {
+  text-align: center;
+  max-width: 720px;
+  padding: 30px;
+}
+
+.note, .question, .final {
+  display: none;
+  line-height: 1.8;
+}
+
+.note {
+  display: block;
+  font-size: 1.2rem;
+}
+
+button {
+  margin: 15px;
+  padding: 12px 28px;
+  font-size: 1rem;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  background: #ff5c8a;
+  color: white;
+  box-shadow: 0 0 15px rgba(255,92,138,0.4);
+}
+
+button:hover {
+  box-shadow: 0 0 25px rgba(255,92,138,0.7);
+}
+
+.no-btn {
+  background: #f3f3f3;
+  color: #555;
+  box-shadow: none;
+}
+
+.volume {
+  font-size: 0.9rem;
+  opacity: 0.6;
+  margin-bottom: 10px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+
+.glow {
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px #ffb3c6; }
+  to   { text-shadow: 0 0 25px #ff5c8a; }
+}
+
+/* hearts */
+.heart {
+  position: absolute;
+  color: #ff5c8a;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  from { transform: translateY(100vh); opacity: 1; }
+  to { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* modal */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.3);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box {
+  background: white;
+  padding: 25px 35px;
+  border-radius: 20px;
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<audio id="song">
+  <source src="yes.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+
+  <!-- NOTE -->
+  <div class="note" id="note">
+    <p>
+      Heyy!!! Honey💝..<br><br>
+      You are the love of my life🥹💗<br>
+      I haven't ever done this before.❣️<br><br>
+      So, Now.... I ask you...<br>
+      For the first time ever... 😩🖤
+    </p>
+    <button onclick="showQuestion()">Continue 💌</button>
+  </div>
+
+  <!-- QUESTION -->
+  <div class="question" id="question">
+    <div class="volume">🔊 Turn on volume</div>
+    <h2>Sweetheart,</h2>
+    <h3>Will you be my Valentine for Eternity?? ♥️✨</h3>
+    <button onclick="yes()">Yes 💕</button>
+    <button class="no-btn" onclick="openModal()">No 🙈</button>
+  </div>
+
+  <!-- FINAL -->
+  <div class="final glow" id="final">
+    <h2>
+      Oh dear!,😩🫠💘<br>
+      I never knew I could be this happy Abdul ❤️<br>
+      I love you so so much Abdul Kavi 🥹♥️
+    </h2>
+  </div>
+
+</div>
+
+<!-- NO confirmation modal -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <p>Are you sure? 🥺</p>
+    <button onclick="closeModal()">Yes</button>
+    <button class="no-btn" onclick="closeModal()">No</button>
+  </div>
+</div>
+
+<script>
+function showQuestion() {
+  document.getElementById("note").style.display = "none";
+  document.getElementById("question").style.display = "block";
+}
+
+function yes() {
+  document.getElementById("question").style.display = "none";
+  document.getElementById("final").style.display = "block";
+
+  const music = document.getElementById("song");
+  music.volume = 0.7;
+  music.play();
+
+  for (let i = 0; i < 20; i++) {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 20 + 12) + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }
+}
+
+function openModal() {
+  document.getElementById("modal").style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+}
+</script>
+
+</body>
+  </html>
